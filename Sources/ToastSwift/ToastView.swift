@@ -113,7 +113,6 @@ open class ToastView: UIView {
     
     private lazy var backgroundView: UIView = {
         let `self` = UIView()
-        self.backgroundColor = UIColor(red: 0.24, green: 0.24, blue: 0.24, alpha: 1.00)
         self.layer.cornerRadius = 16
         self.layer.masksToBounds = false
         self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
@@ -126,7 +125,7 @@ open class ToastView: UIView {
     
     private lazy var textLabel: UILabel = {
         let `self` = UILabel()
-        self.textColor = .white
+        self.textColor = .black
         self.backgroundColor = .clear
         self.font = UIFont.systemFont(ofSize: 13.5)
         self.numberOfLines = 0
@@ -161,7 +160,7 @@ open class ToastView: UIView {
         self.addSubview(self.backgroundView)
         self.addSubview(self.columnStackView)
         self.columnStackView.addArrangedSubview(self.textLabel)
-        self.columnStackView.addArrangedSubview(self.actionTextLabel)
+//        self.columnStackView.addArrangedSubview(self.actionTextLabel)
         
         let actionLabelAttribute: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Medium", size: 13.5),

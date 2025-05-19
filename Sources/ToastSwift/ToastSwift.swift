@@ -33,6 +33,7 @@ open class ToastSwift: Operation {
     
     @objc public var delay: TimeInterval = 0
     @objc public var duration: TimeInterval = 2.0
+    @objc public var action: (() -> Void)?
     
     private var _executing = false
     override public var isExecuting: Bool {
@@ -63,17 +64,19 @@ open class ToastSwift: Operation {
     // MARK: Initializing
     
     @MainActor
-    @objc public init(text: String? = nil, willHideActionButton: Bool = true, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
+    @objc public init(text: String? = nil, backgroundColor: UIColor = UIColor(red: 0.24, green: 0.24, blue: 0.24, alpha: 1.00), willHideActionButton: Bool = true, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
         self.delay = delay
         self.duration = duration
+        self.view.backgroundColor = backgroundColor
         super.init()
         self.text = text
     }
     
     @MainActor
-    @objc public init(attributedText: NSAttributedString?, willHideActionButton: Bool = true, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
+    @objc public init(attributedText: NSAttributedString?, backgroundColor: UIColor = UIColor(red: 0.24, green: 0.24, blue: 0.24, alpha: 1.00), willHideActionButton: Bool = true, delay: TimeInterval = 0, duration: TimeInterval = Delay.short) {
         self.delay = delay
         self.duration = duration
+        self.view.backgroundColor = backgroundColor
         super.init()
         self.attributedText = attributedText
     }
