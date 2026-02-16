@@ -12,7 +12,7 @@ public class ToastKitView: UIView {
     //MARK: - Properties
     
     private var attributes: ToastAttributes!
-    var onButtonTap: (() -> Void)?
+    private(set) var onButtonTap: (() -> Void)?
     
     //MARK: - Initializations
     
@@ -160,8 +160,7 @@ extension ToastKitView {
     func animateWith(duration: TimeInterval, displayDuration: CGFloat) {
         alpha = 0
         
-        UIView.animate(withDuration: duration, animations: { [weak self] in
-            guard let self = self else { return }
+        UIView.animate(withDuration: duration, animations: {
             self.alpha = 1
         }) { [weak self] _ in
             guard let self = self else { return }
@@ -171,14 +170,14 @@ extension ToastKitView {
                 guard let self = self else { return }
                 
                 // Fade Out
-                UIView.animate(withDuration: duration, animations: {
-                    self.alpha = 0
-                }) { _ in
-                    self.removeFromSuperview()
+                UIView.animate(withDuration: duration, animations: { [weak self] in
+                    self?.alpha = 0
+                }) { [weak self] _ in
+                    self?.removeFromSuperview()
                 }
             }
         }
-      }
+    }
 }
 
 //MARK: - Action/s
