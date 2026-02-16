@@ -46,7 +46,7 @@ public enum ToastPosition {
 - `position` - Toast position (top/center/bottom)
 - `positionOffset` - Additional offset from position
 - `duration` - Animation duration
-- `deadline` - Display duration
+- `displayDuration` - Display duration
 
 **Before:** Settings scattered across multiple properties  
 **After:** Single structured configuration object

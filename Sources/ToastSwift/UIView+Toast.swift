@@ -20,10 +20,10 @@ public extension UIView {
         addSubview(toast)
         
         toast.setConstraints(in: self)
-        toast.animateWith(duration: attributes.duration, deadline: attributes.deadline)
+        toast.animateWith(duration: attributes.duration, displayDuration: attributes.displayDuration)
         
-        toast.onButtonTap = {
-            buttonAction?()
+        if let buttonAction = buttonAction {
+            toast.onButtonTap = buttonAction
         }
     }
 }

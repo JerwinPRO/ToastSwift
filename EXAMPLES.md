@@ -91,7 +91,7 @@ let attributes = ToastAttributes(
     position: .bottom,
     positionOffset: 30,
     duration: 0.5,
-    deadline: 3.0
+    displayDuration: 3.0
 )
 
 view.showToastMessage(with: attributes)
@@ -126,7 +126,7 @@ view.showToastMessage(with: attributes)
 let attributes = ToastAttributes(
     message: "This toast will stay for 5 seconds",
     duration: 0.5,  // Fade in/out animation duration
-    deadline: 5.0   // How long to stay visible
+    displayDuration: 5.0   // How long to stay visible
 )
 view.showToastMessage(with: attributes)
 ```

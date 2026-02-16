@@ -17,8 +17,10 @@ ToastSwift is a lightweight and user-friendly library written in Swift for creat
 
 ### Prerequisites
 - Xcode 12.0 or later
-- iOS 15.0 or later
+- iOS 12.0 or later (iOS 15.0+ recommended for new features)
 - Swift 5.0 or later
+
+**Note:** The new ToastKit-inspired features (UIView extension, ToastAttributes) work best on iOS 15.0+, but the original ToastSwift API continues to support iOS 12.0+.
 
 ### Installation
 
@@ -93,7 +95,7 @@ let attributes = ToastAttributes(
     position: .top,  // Can be .top, .center, or .bottom
     positionOffset: 20,
     duration: 0.5,
-    deadline: 3.0
+    displayDuration: 3.0
 )
 
 view.showToastMessage(with: attributes)

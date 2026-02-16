@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ToastKitView: UIView {
+public class ToastKitView: UIView {
     
     //MARK: - Properties
     
@@ -32,7 +32,7 @@ class ToastKitView: UIView {
         vStack.axis = .vertical
         vStack.spacing = attributesParam.titleMessageSpacing
         
-        var subView: UIView? = nil
+        let subView: UIView
         
         if attributesParam.showButton {
             let hStack = UIStackView(arrangedSubviews: [vStack, button])
@@ -44,8 +44,6 @@ class ToastKitView: UIView {
         } else {
             subView = vStack
         }
-        
-        guard let subView else { return }
        
         addSubview(subView)
         subView.translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +113,7 @@ private extension ToastKitView {
         
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.tintColor = attributes.foregroundColor
-        button.addTarget(nil, action: #selector(buttonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         
@@ -159,7 +157,7 @@ extension ToastKitView {
         }
     }
     
-    func animateWith(duration: TimeInterval, deadline: CGFloat) {
+    func animateWith(duration: TimeInterval, displayDuration: CGFloat) {
         alpha = 0
         
         UIView.animate(withDuration: duration, animations: { [weak self] in
@@ -168,8 +166,8 @@ extension ToastKitView {
         }) { [weak self] _ in
             guard let self = self else { return }
             
-            // Wait for `deadline` seconds, then fade out
-            DispatchQueue.main.asyncAfter(deadline: .now() + deadline) { [weak self] in
+            // Wait for `displayDuration` seconds, then fade out
+            DispatchQueue.main.asyncAfter(deadline: .now() + displayDuration) { [weak self] in
                 guard let self = self else { return }
                 
                 // Fade Out
