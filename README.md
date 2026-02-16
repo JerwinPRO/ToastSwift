@@ -5,15 +5,22 @@ ToastSwift is a lightweight and user-friendly library written in Swift for creat
 ## Features
 
 - Easy to integrate into any Swift project.
-- Offers customizable toast messages.
+- Highly customizable toast messages with colors, fonts, padding, corner radius, and more 🎨
+- Supports positioning: top, center, or bottom 🧭
+- Add a button for user interaction (optional) 🖱️
+- Support for title and message labels
+- Queue-based toast management system
+- Accessibility support
 - Lightweight and efficient.
 
 ## Getting Started
 
 ### Prerequisites
 - Xcode 12.0 or later
-- iOS 12.0 or later
+- iOS 12.0 or later (iOS 15.0+ recommended for new features)
 - Swift 5.0 or later
+
+**Note:** The new ToastKit-inspired features (UIView extension, ToastAttributes) work best on iOS 15.0+, but the original ToastSwift API continues to support iOS 12.0+.
 
 ### Installation
 
@@ -31,28 +38,116 @@ ToastSwift is a lightweight and user-friendly library written in Swift for creat
 
 ## Usage
 
-### Basic Toast
-To display a simple toast notification:
+### Method 1: Using UIView Extension (New - Simplified API)
+
+This is the simplest way to show toast messages with full customization support.
+
+#### Basic Toast
 ```swift
 import ToastSwift
 
-Toast.show(message: "This is a test toast", duration: 2.0)
+// Show a simple toast message
+let attributes = ToastAttributes(message: "Hello, World!")
+view.showToastMessage(with: attributes)
 ```
 
-### Customizable Toast
-You can customize the appearance of the toast by specifying options like background color, text color, and position.
-
+#### Toast with Title and Message
 ```swift
 import ToastSwift
 
-let options = ToastOptions(
-    backgroundColor: UIColor.black,
-    textColor: UIColor.white,
-    position: .bottom
+let attributes = ToastAttributes(
+    title: "Success",
+    message: "Your operation completed successfully"
+)
+view.showToastMessage(with: attributes)
+```
+
+#### Toast with Button
+```swift
+import ToastSwift
+
+let attributes = ToastAttributes(
+    message: "Would you like to undo?",
+    showButton: true,
+    buttonText: "Undo"
 )
 
-Toast.show(message: "Custom Toast", options: options, duration: 3.0)
+view.showToastMessage(with: attributes) {
+    print("Undo button tapped!")
+    // Handle button action here
+}
 ```
+
+#### Fully Customized Toast
+```swift
+import ToastSwift
+
+let attributes = ToastAttributes(
+    contentInsets: UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16),
+    cornerRadius: 12,
+    backgroundColor: .colorWithHexString("#2C2C2E"),
+    foregroundColor: .white,
+    title: "Custom Title",
+    message: "This is a fully customized toast message",
+    titleFont: .systemFont(ofSize: 17, weight: .bold),
+    messageFont: .systemFont(ofSize: 15),
+    titleMessageSpacing: 6,
+    position: .top,  // Can be .top, .center, or .bottom
+    positionOffset: 20,
+    duration: 0.5,
+    displayDuration: 3.0
+)
+
+view.showToastMessage(with: attributes)
+```
+
+### Method 2: Using Original Queue-Based API
+
+The original ToastSwift API with queue management for sequential toasts.
+
+#### Basic Toast
+```swift
+import ToastSwift
+
+let toast = ToastSwift(text: "This is a test toast")
+toast.show()
+```
+
+#### Customizable Toast
+```swift
+import ToastSwift
+
+let toast = ToastSwift(
+    text: "Custom Toast",
+    backgroundColor: .black,
+    duration: Delay.long
+)
+toast.show()
+```
+
+### Position Options
+
+ToastSwift now supports three positioning options:
+- `.top` - Display toast at the top of the screen
+- `.center` - Display toast in the center of the screen
+- `.bottom` - Display toast at the bottom of the screen (default)
+
+### Using Hex Colors
+
+You can easily use hex color codes:
+```swift
+let attributes = ToastAttributes(
+    backgroundColor: .colorWithHexString("#FF5733"),
+    foregroundColor: .colorWithHexString("#FFFFFF"),
+    message: "Toast with hex colors"
+)
+```
+
+## More Examples
+
+For more detailed examples and usage patterns, see [EXAMPLES.md](EXAMPLES.md).
+
+For a complete comparison of features merged from ToastKit, see [FEATURE_COMPARISON.md](FEATURE_COMPARISON.md).
 
 ## Contribution
 Contributions are welcome! To contribute:
