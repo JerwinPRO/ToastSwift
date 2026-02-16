@@ -141,6 +141,12 @@ let attributes = ToastAttributes(
 )
 ```
 
+## More Examples
+
+For more detailed examples and usage patterns, see [EXAMPLES.md](EXAMPLES.md).
+
+For a complete comparison of features merged from ToastKit, see [FEATURE_COMPARISON.md](FEATURE_COMPARISON.md).
+
 ## Contribution
 Contributions are welcome! To contribute:
 1. Fork the repository.
